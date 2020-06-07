@@ -19,6 +19,7 @@ namespace PracticeTask6
         static double m;
         const int size = 3;
         static double[] buf = new double[size];
+        string result = string.Empty;
         double Max()
         {
             if (buf[0] > buf[1])
@@ -49,10 +50,10 @@ namespace PracticeTask6
                             if (buf[1] == 0 && buf[2] == 0)
                             {
                                 if (m > Max()) MessageBox.Show("Члены последовательности всегда будут меньше m!", "Вывод", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                else Recursion(counter: 0);
+                                else Calculating();
                             }
                             else if ((buf[1] == 0 || buf[2] == 0) && buf[0] == 0 && m > Max()) MessageBox.Show("Члены последовательности всегда будут меньше m!", "Вывод", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            else Recursion(counter: 0);
+                            else Calculating();
                         }
                     }
                     else MessageBox.Show("Введите число, по модулю не превышающее 10^10!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -60,46 +61,31 @@ namespace PracticeTask6
                 else MessageBox.Show("Некорректный ввод числа!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        string result = string.Empty;
-        void Recursion(int counter)
+        double Recursion(int x)
         {
-            if (counter < size)
+            if (x < size)
             {
-                if (buf[counter] < m)
-                {
-                    result += buf[counter].ToString() + " ";
-                    counter++;
-                    Recursion(counter);
-                }
-                else
-                {
-                    /*if (buf[counter] == m)*/ result += buf[counter].ToString() + " ";
-                    Sequence_output.Text = result;
-                    if (buf[counter] == m) Equals_output.Text = "An равно m";
-                    else Equals_output.Text = "An не равно m";
-                }
+                return buf[x];
             }
             else
             {
-                double digit = buf[size - 1] * buf[size - 2] + buf[size - 3];
-                if (digit < m)
-                {
-                    result += digit.ToString() + " ";
-                    double temp = buf[size - 1];
-                    buf[size - 1] = digit;
-                    buf[size - 3] = buf[size - 2];
-                    buf[size - 2] = temp;
-                    counter++;
-                    Recursion(counter);
-                }
-                else
-                {
-                    /*if (digit == m)*/ result += digit.ToString() + " ";
-                    Sequence_output.Text = result;
-                    if (digit == m) Equals_output.Text = "An равно m";
-                    else Equals_output.Text = "An не равно m";
-                }
+                double res = Recursion(x - 1) * Recursion(x - 2) + Recursion(x - 3);
+                return res;
             }
+        }
+        void Calculating()
+        {
+            int x = 0;
+            double result_value = 0;
+            do
+            {
+                result_value = Recursion(x);
+                result += result_value.ToString() + " ";
+                x++;
+            } while (result_value < m);
+            Sequence_output.Text = result;
+            if (result_value == m) Equals_output.Text = "An равно m";
+            else Equals_output.Text = "An не равно m";
         }
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
@@ -124,10 +110,10 @@ namespace PracticeTask6
                             if (buf[1] == 0 && buf[2] == 0)
                             {
                                 if (m > Max()) MessageBox.Show("Члены последовательности всегда будут меньше m!", "Вывод", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                else Recursion(counter: 0);
+                                else Calculating();
                             }
                             else if ((buf[1] == 0 || buf[2] == 0) && buf[0] == 0 && m > Max()) MessageBox.Show("Члены последовательности всегда будут меньше m!", "Вывод", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            else Recursion(counter: 0);
+                            else Calculating();
                         }
                         else a2_input.Focus();
                     }
@@ -153,10 +139,10 @@ namespace PracticeTask6
                             if (buf[1] == 0 && buf[2] == 0)
                             {
                                 if (m > Max()) MessageBox.Show("Члены последовательности всегда будут меньше m!", "Вывод", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                else Recursion(counter: 0);
+                                else Calculating();
                             }
                             else if ((buf[1] == 0 || buf[2] == 0) && buf[0] == 0 && m > Max()) MessageBox.Show("Члены последовательности всегда будут меньше m!", "Вывод", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            else Recursion(counter: 0);
+                            else Calculating();
                         }
                         else a3_input.Focus();
                     }
@@ -182,10 +168,10 @@ namespace PracticeTask6
                             if (buf[1] == 0 && buf[2] == 0)
                             {
                                 if (m > Max()) MessageBox.Show("Члены последовательности всегда будут меньше m!", "Вывод", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                else Recursion(counter: 0);
+                                else Calculating();
                             }
                             else if ((buf[1] == 0 || buf[2] == 0) && buf[0] == 0 && m > Max()) MessageBox.Show("Члены последовательности всегда будут меньше m!", "Вывод", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            else Recursion(counter: 0);
+                            else Calculating();
                         }
                         else m_input.Focus();
                     }
